@@ -1005,19 +1005,449 @@
 // **************************************************************************************************************************************** 
 // **************************************************************************************************************************************** 
 // 7/4/24
-import java.util.*;
-public class Linkedlist{
-    class Node{
-        int data;
-        Node next;
-        public Node (int data){
-            this.data=data;
-            this.next=null;
-        }
-    }
-    public static Node head;
-    public static Node tail;
-    public static void main(String args[]){
-
-    }
-}
+//Revision 
+//Add first 
+//add last 
+// print list 
+// add in middle
+//size 
+//remove first 
+//remove last 
+//iterative search 
+//recursive search 
+//reverse ll
+//remove nth node 
+//palindrome ll
+// import java.util.*;
+// import javax.swing.plaf.synth.SynthStyle;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node (int data){
+//             this.data=data;
+//             this.next=null;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public static int size;
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         size++;
+//         if(head == null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next = head;
+//         head = newNode;
+//     }
+//     public void addLast(int data){
+//         Node newNode = new Node(data);
+//         size++;
+//         if(head == null){
+//             head = tail = newNode;
+//             return ;
+//         }
+//         tail.next = newNode;
+//         tail = newNode;
+//         newNode.next = null;
+//     }
+//     public void printList(){
+//         Node temp = head; 
+//         while(temp != null){
+//             System.out.print(temp.data+" -> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("null");
+//     }
+//     public void add(int idx,int data){
+//         Node newNode = new Node(data);
+//         if(idx==0){
+//             addFirst(data);
+//             return;
+//         }
+//         size++;
+//         Node temp = head;
+//         int c=0;
+//         while(c<idx-1){
+//             temp=temp.next;
+//             c++;
+//         }
+//         newNode.next=temp.next;
+//         temp.next=newNode;
+//     }
+//     public int removeFirst(){
+//         if(head==null || size ==0){
+//             System.out.println("Linked List is empty ");
+//             return Integer.MIN_VALUE;
+//         }
+//         if(size == 1){
+//             int val = head.data;
+//             head=tail=null;
+//             size = 0;
+//             return val;
+//         }
+//         int val = head.data;
+//         head = head.next;
+//         size--;
+//         return val;
+//     }
+//     public int removeLast(){
+//         if(head==null || size ==0){
+//             System.out.println("Linked List is empty ");
+//             return Integer.MIN_VALUE;
+//         }
+//         if(size==1){
+//             int val = head.data;
+//             size =0;
+//             head=tail=null;
+//             return val;
+//         }
+//         Node temp = head;
+//         int s=0;
+//         while(s<size-2){
+//             s++;
+//             temp =temp.next;
+//         }
+//         int val=temp.next.data;
+//         size--;
+//         temp.next=null;
+//         tail = temp;
+//         return val;
+//     }
+//     public int itrSearch(int key){
+//         Node temp  = head;
+//         int c=0;
+//         while(temp!=null){
+//             if(temp.data==key){
+//                 return c;
+//             }
+//             temp=temp.next;
+//             c++;
+//         }
+//         return -1;
+//     }
+//     public void reverse(){
+//         Node prev =null;
+//         Node curr = head;
+//         Node next;
+//         while(curr!=null){
+//             next = curr.next;
+//             curr.next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         tail=head;
+//         head = prev;
+//     }
+//     public void removeIthNodeFromLast(int n){
+//         Node temp = head;
+//         int s = size-n;
+//         if(size==n){
+//             head=head.next;
+//             size--;
+//             return ;
+//         }
+//         int c=1;
+//         while(c<s){
+//             temp=temp.next;
+//             c++;
+//         }
+//         temp.next=temp.next.next;
+//         size--;
+//         return ;
+//     }
+//     public Node mid(){
+//         Node slow = head;
+//         Node fast = head;
+//         while(fast!=null && fast.next!=null){
+//             slow = slow.next;
+//             fast = fast.next.next;
+//         }
+//         return slow;
+//     }
+//     public Node pReverse(Node mid){
+//         Node prev =null;
+//         Node curr = mid;
+//         Node next;
+//         while(curr!=null){
+//             next = curr.next;
+//             curr.next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         return prev;
+//     }
+//     public boolean isPalindrome(){
+//         Node temp =pReverse(mid());
+//         Node tem=head;
+//         while(tem!=null && temp!=null){
+//             if(temp.data!=tem.data){
+//                 return false;
+//             }
+//             tem=tem.next;
+//             temp=temp.next;
+//         }
+//         return true;
+//     }
+//     public int helper(Node head,int key){
+//         if(head==null){
+//             return -1;
+//         }
+//         if(head.data==key){
+//             return 0;
+//         }
+//         int idx = helper(head.next,key);
+//         if(idx==-1){
+//             return -1;
+//         }
+//         return idx+1;
+//     }
+//     public int recSearch(int key){
+//         return helper(head,key);
+//     }
+//     public static void main(String args[]){
+//         Linkedlist ll = new Linkedlist();
+//         ll.addFirst(2);
+//         ll.addFirst(1);
+//         ll.addLast(4);
+//         ll.addLast(5);
+//         ll.printList();
+//         System.out.println("Size of the linked list : "+ ll.size);
+//         ll.add(2,3);
+//         ll.printList();
+//         System.out.println("Size of the Linked list : "+ll.size);
+//         System.out.println(ll.removeFirst());
+//         ll.printList();
+//         System.out.println("Size of the Linked list : "+ll.size);
+//         ll.removeLast();
+//         System.out.println("now see ");
+//         ll.printList();
+//         System.out.println("Size of the Linked List : "+ll.size);
+//         ll.addLast(2);
+//         ll.printList();
+//         System.out.println(ll.itrSearch(10));
+//         ll.reverse();
+//         ll.printList();
+//         ll.removeIthNodeFromLast(3);
+//         ll.printList();
+//         System.out.println("Size of the Linked List : "+ll.size);
+//         ll.addFirst(1);
+//         ll.addLast(1);
+//         System.out.println("Size of the Linked List : "+ll.size);
+//         ll.printList();
+//         System.out.println(ll.isPalindrome());
+//         System.out.println(ll.recSearch(3));
+//     }
+// }
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=next;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public static int size;
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         size++;
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next=head;
+//         head=newNode;
+//     }
+//     public void addLast(int data){
+//         Node newNode = new Node(data);
+//         size++;
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         tail.next=newNode;
+//         tail=newNode;
+//         newNode.next=null;
+//     }
+//     public void printList(){
+//         Node temp = head;
+//         while(temp!=null){
+//             System.out.print(temp.data+" -> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("Null");
+//     }
+//     public void add(int idx,int data){
+//         Node newNode  =  new Node(data);
+//         if(idx==0){
+//             addFirst(data);
+//             return;
+//         }
+//         size++;
+//         Node temp = head;
+//         int c=0;
+//         while(c<idx-1){
+//             c++;
+//             temp=temp.next;
+//         }
+//         newNode.next=temp.next;
+//         temp.next=newNode;
+//     }
+//     public int removeFirst(){
+//         if(head==null){
+//             System.out.println("Linked list is empty ");
+//             return Integer.MIN_VALUE;
+//         }
+//         int val=head.data;
+//         head=head.next;
+//         size--;
+//         return val;
+//     }
+//     public int removeLast(){
+//         if(head==null){
+//             System.out.println("Linked list is empty ");
+//             return Integer.MIN_VALUE;
+//         }
+//         Node temp = head;
+//         int c=1;
+//         while(c<size-1){
+//             temp=temp.next;
+//             c++;
+//         }
+//         int val=temp.next.data;
+//         temp.next=null;
+//         tail=temp;
+//         size--;
+//         return val;
+//     }
+//     public void reverse(){
+//         Node prev= null;
+//         Node curr = head;
+//         Node next;
+//         while(curr!=null){
+//             next=curr.next;
+//             curr.next=prev;
+//             prev=curr;
+//             curr=next;
+//         }
+//         tail=head;//this statement is necessary when you need to modify the same code 
+//         head=prev;
+//     }
+//     public int itrSearch(int key){
+//         Node temp = head;
+//         int c=0;
+//         while(temp!=null){
+//             if(temp.data==key){
+//                 return c;
+//             }
+//             temp=temp.next;
+//             c++;
+//         }
+//         return -1;
+//     }
+//     public int helper(Node head,int key){
+//         if(head==null){
+//             return -1;
+//         }
+//         if(head.data==key){
+//             return 0;
+//         }
+//         int idx = helper(head.next,key);
+//         if(idx==-1){
+//             return -1;
+//         }
+//         return idx+1;
+//     }
+//     public int recSearch(int key){
+//         return helper(head,key);
+//     }
+//     public int removeNthNode(int n){
+//         int c=size-n;
+//         if(n==size){
+//             int val=head.data;
+//             head=head.next;
+//             size--;
+//             return val;
+//         }
+//         Node temp = head;
+//         size--;
+//         int e=1;
+//         while(e<c){
+//             temp=temp.next;
+//             e++;
+//         }
+//         int val = temp.next.data;
+//         temp.next=temp.next.next;
+//         return val;
+//     }
+//     public Node pMid(){
+//         Node slow = head;
+//         Node fast = head;
+//         while(fast!=null&&fast.next!=null){
+//             slow=slow.next;
+//             fast=fast.next.next;
+//         }
+//         return slow;
+//     }
+//     public Node pReverse(Node mid){
+//         Node prev =null;
+//         Node curr = mid;
+//         Node next;
+//         while(curr!=null){
+//             next=curr.next;
+//             curr.next=prev;
+//             prev=curr;
+//             curr=next;
+//         }
+//         return prev;
+//     }
+//     public boolean isPalindrome(){
+//         Node mid = pMid();
+//         Node rHead = pReverse(mid);
+//         Node temp=head;
+//         while(rHead!=null){
+//             if(temp.data!=rHead.data){
+//                 return false;
+//             }
+//             temp=temp.next;
+//             rHead=rHead.next;
+//         }
+//         return true;
+//     }
+//     public static void main(String args[]){
+//         Linkedlist ll = new Linkedlist();
+//         ll.addFirst(2);
+//         ll.addFirst(1);
+//         ll.addLast(4);
+//         ll.addLast(5);
+//         ll.printList();
+//         System.out.println(ll.size);
+//         ll.add(2,3);
+//         ll.printList();
+//         System.out.println(ll.size);
+//         ll.removeFirst();
+//         ll.printList();
+//         System.out.println(ll.size);
+//         ll.removeLast();
+//         ll.printList();
+//         System.out.println(ll.size);
+//         ll.reverse();
+//         ll.printList();
+//         System.out.println(ll.itrSearch(2));
+//         System.out.println(ll.recSearch(2));
+//         System.out.println(ll.removeNthNode(2));
+//         ll.printList();
+//         System.out.println(ll.size);
+//         System.out.println(ll.isPalindrome());
+//         ll.addFirst(2);
+//         System.out.println(ll.isPalindrome());
+//     }
+// }
+// ******************************************************************************************************************************************************************************package DSA;
+// ***********************************************************************************************************************************************
