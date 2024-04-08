@@ -1451,3 +1451,533 @@
 // }
 // ******************************************************************************************************************************************************************************package DSA;
 // ***********************************************************************************************************************************************
+// 8/4/24
+// LinkedList part 2 
+//detecting a cycle in ll 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=next;
+//         }    
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next=head;
+//         head=newNode;
+//     }
+//     public boolean isCycle(){//Floyd cycle finding algo
+//         Node slow = head;
+//         Node fast = head;
+//         int c=0;
+//         while(fast!=null && fast.next!=null){
+//             c++;
+//             slow = slow.next;
+//             fast = fast.next.next;
+//             if(slow==fast){
+//                 return true;
+//             }
+//         }
+//         System.out.println("c is: "+c);
+//         return false;
+//     }
+// public static void main(String args[]){
+//     Linkedlist ll = new Linkedlist();
+//     ll.addFirst(5);
+//     ll.addFirst(4);
+//     ll.addFirst(3);
+//     ll.addFirst(2);
+//     ll.addFirst(1);
+//     tail.next=head;
+//     System.out.println(ll.isCycle());
+// }
+// }
+//removing a cycle from a ll
+// import java.util.*;
+// public class Linkedlist{
+// public  class Node{
+//     int data;
+//     Node next;
+//     public Node(int data){
+//         this.data=data;
+//         this.next=next;
+//     }
+// }
+// public static Node head;
+// public static Node tail;
+// public void removeCycle(){
+//     Node slow = head;
+//     Node fast = head;
+//     boolean b=false;
+//     while(fast!=null && fast.next!=null){
+//         fast = fast.next.next;
+//         slow = slow.next;
+//         if(fast==slow){
+//             b=true;
+//             break;
+//         }
+//     }
+//     Node prev= null;
+//     if(b){
+//         slow = head;
+//         while(slow!=fast){
+//             prev = fast;
+//             slow = slow.next;
+//             fast = fast.next;
+//         }
+//     }else{
+//         System.out.println("Cycle don't exist");
+//         return ;
+//     }
+//     prev.next = null;
+// }
+// public boolean isCycle(){
+//     Node slow = head;
+//     Node fast = head;
+//     while(fast!=null && fast.next!=null){
+//         slow  = slow.next;
+//         fast = fast.next.next;
+//         if(fast==slow){
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+// public static void main(String args[]){
+//     Linkedlist ll = new Linkedlist();
+//     head=ll.new Node(1);
+//     Node temp = ll.new Node(2);
+//     head.next = temp ;
+//     // head.next = new Node(2);
+//     head.next.next = ll.new Node(3);
+//     head.next.next.next = temp;
+//     System.out.println(ll.isCycle());
+//     ll.removeCycle();
+//     System.out.println(ll.isCycle());
+// }
+// }
+//Java Collections Framework -> optimized
+// import java.util.*;
+// import java.util.LinkedList;
+// public class Linkedlist{
+//     public static void main(String args[]){
+//         // create -
+//         LinkedList<Integer> ll = new LinkedList<>();
+//         ll.addLast(1);
+//         ll.addLast(2);
+//         ll.addFirst(0);
+//         System.out.println(ll);
+//         ll.removeLast();
+//         ll.removeFirst();
+//         System.out.println(ll);
+//     }
+// }
+//MergeSort on a LinkedList 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=null;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next = head;
+//         head=newNode;
+//     }
+//     public void printList(){
+//         Node temp = head;
+//         while(temp!=null){
+//             System.out.print(temp.data+" -> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("Null");
+//     }
+//     private Node getMid(Node head){
+//         Node slow = head;
+//         Node fast = head.next;
+//         while(fast!=null && fast.next!=null){
+//             slow=slow.next;
+//             fast=fast.next.next;
+//         }
+//         return slow;
+//     }
+//     private Node merge(Node head1,Node head2){
+//         Node mergedL = new Node(-1);
+//         Node temp = mergedL;
+//         while(head1!=null&&head2!=null){
+//             if(head1.data<=head2.data){
+//                 temp.next=head1;
+//                 head1=head1.next;
+//                 temp=temp.next;
+//             }else{
+//                 temp.next=head2;
+//                 head2=head2.next;
+//                 temp=temp.next;
+//             }
+//         }
+//         while(head1!=null){
+//             temp.next=head1;
+//             head1=head1.next;
+//             temp=temp.next;
+//         }
+//         while(head2!=null){
+//             temp.next=head2;
+//             head2=head2.next;
+//             temp=temp.next;
+//         }
+//         return mergedL.next;
+//     }
+//     public Node mergeSort(Node head){
+//         if(head==null || head.next==null){
+//             return head;
+//         }
+//         //find mid
+//         Node mid = getMid(head); 
+//         //left and right half ms
+//         Node rightH = mid.next;
+//         mid.next=null;
+//         Node newL = mergeSort(head);
+//         Node newR = mergeSort(rightH);
+//         //merge
+//         return merge(newL,newR);
+//     }
+//     public static void main(String args[]){
+//         Linkedlist ll = new Linkedlist();
+//         ll.addFirst(1);
+//         ll.addFirst(2);
+//         ll.addFirst(3);
+//         ll.addFirst(4);
+//         // ll.addFirst(5);
+//         ll.printList();
+//         ll.head=ll.mergeSort(ll.head);
+//         ll.printList();
+//         System.out.println("Not a reverse but the sorted Linked List ");
+//     }
+// }
+//Zig-Zag LinkedList 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=next;
+//         }
+//     }
+//     public void addLast(int data){
+//         Node newNode = new Node(data);
+//         if(head==null){
+//             head=tail=newNode;
+//         }
+//         tail.next=newNode;
+//         tail=newNode;
+//         newNode.next=null;
+//     }
+//     public void printList(){
+//         Node temp = head;
+//         while(temp!=null){
+//             System.out.print(temp.data+" -> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("Null");
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public Node getMid(Node head){
+//         Node slow = head;
+//         Node fast = head.next;
+//         while(fast!=null&&fast.next!=null){
+//             slow=slow.next;
+//             fast=fast.next.next;
+//         }
+//         return slow;
+//     }
+//     public Node reverse(Node head){
+//         Node prev=null;
+//         Node curr=head;
+//         Node next;
+//         while(curr!=null){
+//             next=curr.next;
+//             curr.next=prev;
+//             prev=curr;
+//             curr=next;
+//         }
+//         return prev;
+//     }
+//     public void zigZag(){
+//         //find mid 
+//         Node mid = getMid(head);
+//         //reverse 2nd half
+//         Node rHead = mid.next;
+//         mid.next=null;
+//         Node rrHead = reverse(rHead);
+//         //alternate merging 
+//         Node lHead=head;
+//         Node nL,nR;
+//         while(lHead!=null&&rrHead!=null){
+//             nL=lHead.next;
+//             lHead.next=rrHead;
+//             nR=rrHead.next;
+//             rrHead.next=nL;
+//             lHead=nL;
+//             rrHead=nR;
+//         }
+//     }
+//     public static void main(String args[]){
+//         Linkedlist ll = new Linkedlist();
+//         ll.addLast(1);
+//         ll.addLast(2);
+//         ll.addLast(3);
+//         ll.addLast(4);
+//         ll.addLast(5);
+//         ll.printList();
+//         ll.zigZag();
+//         ll.printList();
+//     }
+// }
+//Doubly LinkedList 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         Node prev;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=null;
+//             this.prev=null;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public static int size;
+//     //add
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         size++;
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next=head;
+//         head.prev=newNode;
+//         head=newNode;
+//     }
+//     //print
+//     public void print(){
+//         Node temp = head;
+//         while(temp!=null){
+//             System.out.print(temp.data+" <-> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("NULL");
+//     }
+//     //remove first - remove last 
+//     public int removeFirst(){
+//         if(head==null){
+//             System.out.println("Linked List is empty");
+//             return Integer.MIN_VALUE;
+//         }
+//         if(size==1){
+//             int val= head.data;
+//             head=tail=null;
+//             size=0;
+//             return val;
+//         }
+//         int val= head.data;
+//         head=head.next;
+//         size--;
+//         head.prev=null;
+//         return val;
+//     }
+//     public static void main(String args[]){
+//         Linkedlist dl = new Linkedlist();
+//         dl.addFirst(3);
+//         dl.addFirst(2);
+//         dl.addFirst(1);
+//         dl.print();
+//         System.out.println(dl.size);
+//         dl.removeFirst();
+//         dl.print();
+//         System.out.println(dl.size);
+//     }
+// }
+//Reverse of a Doubly LinkedList 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         Node prev;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=null;
+//             this.prev=null;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         if(head==null){
+//             head=tail=newNode;
+//             return;
+//         }
+//         newNode.next=head;
+//         head.prev=newNode;
+//         head=newNode;
+//     }
+//     public void printList(){
+//         Node temp = head;
+//         while(temp!=null){
+//             System.out.print(temp.data+" <-> ");
+//             temp=temp.next;
+//         }
+//         System.out.println("NULL ");
+//     }
+//     public void reversedl(){
+//         Node curr=head;
+//         Node prev=null;
+//         Node next;
+//         while(curr!=null){
+//             next=curr.next;
+//             curr.next=prev;
+//             curr.prev=next;
+//             prev=curr;
+//             curr=next;
+//         }
+//         head=prev;
+//     }
+//     public static void main(String args[]){
+//         Linkedlist dl = new Linkedlist();
+//         dl.addFirst(5);
+//         dl.addFirst(4);
+//         dl.addFirst(3);
+//         dl.addFirst(2);
+//         dl.addFirst(1);
+//         dl.printList();
+//         dl.reversedl();
+//         dl.printList();
+//     }
+// }
+//Circular Linked List 
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//             this.next=next;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     // public Node addToEmpty(Node last,int data)
+//     public void addFirst(int data){
+//         Node newNode = new Node(data);
+//         if(head==null){
+//             head=tail=null;
+//             return;
+//         }
+//         newNode.next=head;
+//         head=newNode;
+//     }
+//     public static void main(String args[]){
+//         Linkedlist cl = new Linkedlist();
+//         cl.addFirst(3);
+//         cl.addFirst(2);
+//         cl.addFirst(1);
+//         tail.next=head;
+//         Node temp = head;
+//         while(temp!=tail.next){
+//             System.out.print(temp.data);
+//             temp=temp.next;
+//         }
+//         System.out.println();
+//     }
+// }
+// import java.util.*;
+// public class Linkedlist{
+//     class Node{
+//         int data;
+//         Node next;
+//         public Node(int data){
+//             this.data=data;
+//         }
+//     }
+//     public static Node head;
+//     public static Node tail;
+//     public Node addToEmpty(int data){
+//         Node temp =head;
+//         if(temp!=null){
+//             return temp;
+//         }
+//         Node newNode = new Node(data);
+//         // newNode.data=data;
+//         temp=newNode;
+//         newNode.next=temp;
+//         return temp;
+//     }
+//     public Node addEnd(int data){
+//         Node temp = head;
+//         if(temp==null){
+//             return addToEmpty(data);
+//         }
+//         Node newNode = new Node(data);
+//         newNode.next=temp.next;
+//         temp.next=newNode;
+//         temp=newNode;
+//         return temp;
+//     }
+//     public Node addFront(int data){
+//         Node temp = head;
+//         if(temp==null){
+//             return addToEmpty(data);
+//         }
+//         Node newNode = new Node(data);
+//         newNode.next=temp.next;
+//         temp.next=newNode;
+//         return temp;
+//     }
+//     public void traverse(){
+//         Node temp = head;
+//         if(temp==null){
+//             System.out.println("List is empty");
+//             return ;
+//         }
+//         do{
+//             System.out.print(temp.data+" -> ");
+//             temp=temp.next;
+//         }while(temp!=tail.next);
+//     }
+//     public static void main(String args[]){
+//         Linkedlist ll = new Linkedlist();
+//         ll.addToEmpty(6);
+//         ll.addEnd(8);
+//         ll.addFront(2);
+//         ll.traverse();
+//     }
+// }
+// *************************************************************************************************************************** 
+// *************************************************************************************************************************** 
