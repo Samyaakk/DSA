@@ -1,74 +1,68 @@
 class Solution {
-    public int[] nsl(int arr[]){
-        int res[] = new int[arr.length];
-        Arrays.fill(res,arr.length);
+    public int largestRectangle(int heights[]){
+        int n = heights.length;
+        int lse[] = new int[n];
+        int rse[] = new int[n];
+        Arrays.fill(lse,-1);
+        Arrays.fill(rse,-1);
         Stack<Integer> st = new Stack<>();
-        for(int i=0;i<arr.length;i++){
-            while(!st.isEmpty()&&arr[i]<arr[st.peek()]){
-                res[st.peek()]=i;
+        for(int i=0;i<n;i++){
+            while(!st.isEmpty() && heights[st.peek()]>=heights[i]){
                 st.pop();
             }
+            if(st.isEmpty())lse[i] = 0;
+            else lse[i] = st.peek()+1;
+
             st.push(i);
         }
-        return res;
-    }
-    public int[] nsr(int arr[]){
-        int res[] = new int[arr.length];
-        Arrays.fill(res,-1);
-        Stack<Integer> st = new Stack<>();
-        for(int i=arr.length-1;i>=0;i--){
-            while(!st.isEmpty()&&arr[i]<arr[st.peek()]){
-                res[st.peek()]=i;
+        st = new Stack<>();
+        for(int i=n-1;i>=0;i--){
+            while(!st.isEmpty() && heights[st.peek()]>=heights[i]){
                 st.pop();
             }
+            if(st.isEmpty())rse[i] = n-1;
+            else rse[i] = st.peek()-1;
+
             st.push(i);
         }
-        return res;
-    }
-    public int lra(int[] heights) {
-        int res[] = nsl(heights);
-        int res2[] = nsr(heights);
-        for(int i=0;i<res.length;i++){
-            System.out.print(res[i]+" ");
-        }
-        System.out.println();
-        for(int i=0;i<res2.length;i++){
-            System.out.print(res2[i]+" ");
-        }
-        int area[] = new int[heights.length];
-        for(int i=0;i<res.length;i++){
-            area[i]=(res[i]-res2[i]-1)*heights[i];
-        }
-        System.out.println();
-        int max=0;
-        for(int i=0;i<res.length;i++){
-            if(max<area[i])max=area[i];
-            System.out.print(area[i]+" ");
+        int max = 0;
+        for(int i=0;i<n;i++){
+            max= Math.max(max,(rse[i]-lse[i]+1)*heights[i]);
         }
         return max;
     }
-    public int maximalRectangle(char[][] mat) {
-        int n = mat.length;
-        int m = mat[0].length;
-        int mati[][] = new int[n][m];
+    public int maximalRectangle(char[][] matrix) {
+        int n = matrix.length;
+        int m  = matrix[0].length;
+        int mat[][] = new int[n][m];
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(mat[i][j]=='1'){
-                    mati[i][j] = 1;
+                char c = matrix[i][j];
+                if(c=='0')mat[i][j]= 0;
+                else mat[i][j] = 1;
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i==0)continue;
+                else{
+                    if(mat[i][j]==0){
+                        mat[i][j] = 0;
+                    }else{
+                        mat[i][j] = 1 + mat[i-1][j];
+                    }
                 }
             }
         }
-        int arr[] = new int[m];
-        int max= 0;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(mati[i][j]==0){
-                    arr[j] = 0;
-                }else{
-                    arr[j]+=1;
-                }
-            }
-            max = Math.max(max,lra(arr));       
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<m;j++){
+        //         System.out.print(mat[i][j]+" ");
+        //     }
+        //     System.out.println();
+        // }
+        int max =0;
+        for(int arr[]:mat){
+            max=  Math.max(max,largestRectangle(arr));
         }
         return max;
     }
