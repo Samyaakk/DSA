@@ -1,11 +1,27 @@
 class Solution {
-    public boolean dfs(int idx,int p,int vis[],List<List<Integer>> adj){
-        vis[idx]  = 1;
-        for(int i:adj.get(idx)){
-            if(vis[i]==0){
-                if(dfs(i,idx,vis,adj))return true;
-            }else if(i!=p){
-                return true;
+    class Pair{
+        int node;
+        int parent;
+        Pair(int node,int parent){
+            this.node = node;
+            this.parent = parent;
+        }
+    }
+    public boolean bfs(int idx,int vis[],List<List<Integer>> list){
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(idx,-1));
+        vis[idx] = 1;
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            int node = p.node;
+            int parent = p.parent;
+            for(int i:list.get(node)){
+                if(vis[i]==0){
+                    vis[i] = 1;
+                    q.add(new Pair(i,node));
+                }else if(i!=parent){
+                    return true;
+                }
             }
         }
         return false;
@@ -23,7 +39,7 @@ class Solution {
         int vis[] = new int[V];
         for(int i=0;i<V;i++){
             if(vis[i]==0){
-                if(dfs(i,-1,vis,list))return true;
+                if(bfs(i,vis,list))return true;
             }
         }
         return false;
