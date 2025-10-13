@@ -10,19 +10,17 @@ class Node{
 */
 
 class Solution {
-    int max  =Integer.MIN_VALUE;
-    int fms(Node root){
+    int maxSum = Integer.MIN_VALUE;
+    int mps(Node root){
         if(root==null)return 0;
-        int lsum = Math.max(0,fms(root.left));
-        int rsum = Math.max(0,fms(root.right));
-        max = Math.max(max,root.data+lsum+rsum);
-        return root.data+Math.max(lsum,rsum);
+        int ls = Math.max(0,mps(root.left));
+        int rs = Math.max(0,mps(root.right));
+        maxSum = Math.max(maxSum,ls+rs+root.data);
+        return root.data+Math.max(rs,ls);
     }
     int findMaxSum(Node root) {
         // code here
-        if(root==null)return 0;
-        if(root.left==null&&root.right==null)return root.data;
-        fms(root);
-        return max;
+        mps(root);
+        return maxSum;
     }
 }
