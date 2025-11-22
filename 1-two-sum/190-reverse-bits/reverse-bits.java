@@ -1,15 +1,11 @@
 class Solution {
     public int reverseBits(int n) {
-        int c=0;
         int no = n;
-        int k = 31;
         int res = 0;
-        while(no>0){
-            if((no&1)==1){
-                res+=Math.pow(2,k);
-            }
+        for(int i=0;i<32;i++){
+            res<<=1;
+            res|=(no&1);
             no>>=1;
-            k--;
         }
         // no = n;
         // int arr[] = new int[32];
